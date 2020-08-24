@@ -27,7 +27,8 @@ class TabNavigator2 extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => routeBuilders[TabNavigatorRoutes2.detail](context),
+        builder: (context) =>
+            routeBuilders[TabNavigatorRoutes2.detail](context),
       ),
     );
   }
