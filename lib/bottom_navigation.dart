@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
 
-enum TabItem { tab1, tab2, tab3 }
+enum TabItem { tab1, tab2, tab3, tab4, tab5 }
 
 Map<TabItem, String> tabName = {
   TabItem.tab1: 'Tab1',
   TabItem.tab2: 'Tab2',
   TabItem.tab3: 'Tab3',
+  TabItem.tab4: 'Tab4',
+  TabItem.tab5: 'Tab5',
 };
 
 Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.tab1: Colors.red,
   TabItem.tab2: Colors.green,
   TabItem.tab3: Colors.blue,
+  TabItem.tab4: Colors.purple,
+  TabItem.tab5: Colors.brown,
 };
 
 class BottomNavigation extends StatelessWidget {
-  BottomNavigation({this.currentTab, this.onSelectTab});
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
+  BottomNavigation({this.currentTab, this.onSelectTab});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: [
-        _buildItem(tabItem: TabItem.tab1),
-        _buildItem(tabItem: TabItem.tab2),
-        _buildItem(tabItem: TabItem.tab3),
+        _buildItem(tabItem: TabItem.tab1, iconData: Icons.ac_unit),
+        _buildItem(tabItem: TabItem.tab2, iconData: Icons.access_alarm),
+        _buildItem(tabItem: TabItem.tab3, iconData: Icons.account_balance),
+        _buildItem(tabItem: TabItem.tab4, iconData: Icons.add_a_photo),
+        _buildItem(tabItem: TabItem.tab5, iconData: Icons.airline_seat_flat),
       ],
       onTap: (index) => onSelectTab(
         TabItem.values[index],
@@ -34,12 +40,12 @@ class BottomNavigation extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem _buildItem({TabItem tabItem}) {
+  BottomNavigationBarItem _buildItem({TabItem tabItem, IconData iconData}) {
     String text = tabName[tabItem];
-    IconData icon = Icons.ac_unit;
+
     return BottomNavigationBarItem(
       icon: Icon(
-        icon,
+        iconData,
         color: _colorTabMatching(item: tabItem),
       ),
       title: Text(
