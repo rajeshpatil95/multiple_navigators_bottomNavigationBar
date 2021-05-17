@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_bottomNavigationBar/bottom_navigation.dart';
-import 'package:multiple_bottomNavigationBar/views/tab2/plp_page.dart';
-import 'package:multiple_bottomNavigationBar/views/tab2/category_list_page.dart';
-import 'package:multiple_bottomNavigationBar/views/tab2/sub_category_list_page.dart';
+import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab2/plp_page.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab2/category_list_page.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab2/sub_category_list_page.dart';
 
 class TabNavigator2 extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;

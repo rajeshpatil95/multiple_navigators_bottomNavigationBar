@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_bottomNavigationBar/bottom_navigation.dart';
-import 'package:multiple_bottomNavigationBar/views/tab4/search.dart';
+import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab4/search.dart';
 
 class TabNavigator4 extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;

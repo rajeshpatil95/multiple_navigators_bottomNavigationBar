@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multiple_bottomNavigationBar/bottom_navigation.dart';
+import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
 
 class TabNavigator5 extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;

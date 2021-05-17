@@ -1,17 +1,1 @@
-import 'package:flutter/material.dart';
-import 'package:multiple_bottomNavigationBar/app.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: App(),
-    );
-  }
-}
+// main.dart should not be used, use either main_dev.dart or main_prod.dart which invokes main_default.dart

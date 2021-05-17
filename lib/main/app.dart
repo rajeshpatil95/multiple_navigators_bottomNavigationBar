@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:multiple_bottomNavigationBar/appStateContainer/state_model.dart';
-import 'package:multiple_bottomNavigationBar/bottom_navigation.dart';
+import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_1.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_2.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_3.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_4.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_5.dart';
-import 'package:multiple_bottomNavigationBar/views/tab5/cart.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab5/cart.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class App extends StatefulWidget {
+class LaunchApp extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => AppState();
+  State<StatefulWidget> createState() => LaunchAppState();
 }
 
-class AppState extends State<App> {
+class LaunchAppState extends State<LaunchApp> {
   StateModel model;
 
   @override
