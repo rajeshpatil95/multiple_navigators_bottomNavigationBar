@@ -1,27 +1,13 @@
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:multiple_bottomNavigationBar/storage/shared_preferences.dart';
+import 'package:multiple_bottomNavigationBar/webservice/fiji.dart/fiji_repository.dart';
 
 class DI {
   DI();
 
   factory DI.initializeDependencies() {
     addDependency<Preferences>(PreferencesImpl(), true);
-    addDependency<AddressFormRepository>(AddressFormRepositoryImpl(), true);
-    addDependency<ConfirmAddressRepository>(
-        ConfirmAddressRepositoryImpl(), true);
-    addDependency<ChangeTenureRepository>(ChangeTenureRepositoryImpl(), true);
-    addDependency<TransactionDetailRepository>(
-        TransactionDetailRepositoryImpl(), true);
-    addDependency<CardDetailsRepository>(CardDetailsRepositoryImpl(), true);
-    addDependency<HomePageRepository>(HomePageRepositoryImpl(), true);
-    addDependency<CardActivationRepository>(
-        CardActivationRepositoryImpl(), true);
-    addDependency<CardBlockingRepository>(CardBlockingRepositoryImpl(), true);
-    addDependency<OtpRepository>(OtpRepositoryImpl(), true);
-    addDependency<InstantKycRepository>(InstantKycRepositoryImpl(), true);
-    addDependency<SalaryProofRepository>(SalaryProofRepositoryImpl(), true);
-    addDependency<PanFormRepository>(PanFormRepositoryImpl(), true);
-    addDependency<CurrentAddressRepository>(CurrentAddressRepositoryImpl(), true);
+    addDependency<FijiRepository>(FijiRepositoryImpl(), true);
     return DI();
   }
 

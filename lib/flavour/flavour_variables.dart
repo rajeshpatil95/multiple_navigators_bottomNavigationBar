@@ -19,7 +19,7 @@ class ProductFlavour {
 class Dev {
   static Map<String, String> _strings = {
     FlavourVariable.flavour: "Dev",
-    FlavourVariable.baseUrl: "demo.moneytap.com",
+    FlavourVariable.baseUrl: "dev.example.com",
     FlavourVariable.appName: "ChillPay"
   };
 
@@ -39,7 +39,7 @@ class Dev {
 class Prod {
   static Map<String, String> _strings = {
     FlavourVariable.flavour: "Prod",
-    FlavourVariable.baseUrl: "app.moneytap.com",
+    FlavourVariable.baseUrl: "prod.example.com",
     FlavourVariable.appName: "ChillPay"
   };
 
