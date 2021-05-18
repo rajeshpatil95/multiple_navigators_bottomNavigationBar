@@ -8,7 +8,11 @@ import 'package:multiple_bottomNavigationBar/di/di_initializer.dart';
 import 'package:multiple_bottomNavigationBar/main/app.dart';
 import 'dart:async';
 import 'package:multiple_bottomNavigationBar/native/platform_utils.dart';
+import 'package:multiple_bottomNavigationBar/navigation/routes.dart';
 import 'package:sentry/sentry.dart';
+import 'package:multiple_bottomNavigationBar/navigation/route_initializer.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:multiple_bottomNavigationBar/generated/l10n.dart';
 
 defaultMain() {
   FlutterError.onError = (FlutterErrorDetails details) async {
@@ -23,7 +27,18 @@ defaultMain() {
     DI.initializeDependencies();
     AppAnalyticsManager.init();
     Bloc.observer = MTBlocObserver();
-    runApp(StateContainer(child: LaunchApp()));
+    runApp(MaterialApp(
+        theme: ThemeData(),
+        localizationsDelegates: [
+          Strings.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate
+        ],
+        supportedLocales: Strings.delegate.supportedLocales,
+        onGenerateRoute: (settings) {},
+        routes: {Routes.fiji: (context) => navigateToFiji()},
+        home: StateContainer(child: LaunchApp())));
   }, (Object error, StackTrace stackTrace) async {
     final SentryClient sentry = await Sentry.initSentryClient();
     Sentry.reportError(sentry, error, stackTrace);

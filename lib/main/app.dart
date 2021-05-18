@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multiple_bottomNavigationBar/appStateContainer/state_model.dart';
+import 'package:multiple_bottomNavigationBar/bloc/fiji/fiji_bloc.dart';
+import 'package:multiple_bottomNavigationBar/di/di_initializer.dart';
 import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_1.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_2.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_3.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_4.dart';
 import 'package:multiple_bottomNavigationBar/tabNavigators/tab_navigator_5.dart';
-import 'package:multiple_bottomNavigationBar/presentation/tab5/cart.dart';
+import 'package:multiple_bottomNavigationBar/presentation/tab5/fiji.dart';
+import 'package:multiple_bottomNavigationBar/webservice/fiji.dart/fiji_repository.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LaunchApp extends StatefulWidget {
@@ -37,12 +42,14 @@ class LaunchAppState extends State<LaunchApp> {
         context,
         MaterialPageRoute(
             builder: (context) => ScopedModel(
-                  model: model,
-                  child: CartPage(
+                model: model,
+                child: BlocProvider<FijiBloc>(
+                  create: (context) => FijiBloc(DI.inject<FijiRepository>()),
+                  child: FijiScreen(
                       color: activeTabColor[tabItem],
-                      title: "Shopping Cart",
+                      title: "Fiji",
                       onPush: (context) {}),
-                )),
+                ))),
       );
     }
 
@@ -92,8 +99,19 @@ class LaunchAppState extends State<LaunchApp> {
     return tabNavigator;
   }
 
+  Widget _buildOffstageNavigator(TabItem tabItem) {
+    return Offstage(
+      offstage: model.currentTab != tabItem,
+      child: _tabNavigator(tabItem),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return ScopedModel(
         model: model,
         child: ScopedModelDescendant<StateModel>(
@@ -116,27 +134,22 @@ class LaunchAppState extends State<LaunchApp> {
               // let system handle back button if we're on the first route
               return isFirstRouteInCurrentTab;
             },
-            child: Scaffold(
-              body: Stack(children: <Widget>[
-                _buildOffstageNavigator(TabItem.tab1),
-                _buildOffstageNavigator(TabItem.tab2),
-                _buildOffstageNavigator(TabItem.tab3),
-                _buildOffstageNavigator(TabItem.tab4),
-                _buildOffstageNavigator(TabItem.tab5),
-              ]),
-              bottomNavigationBar: BottomNavigation(
-                currentTab: model.currentTab,
-                onSelectTab: _selectTab,
+            child: MaterialApp(
+              home: Scaffold(
+                body: Stack(children: <Widget>[
+                  _buildOffstageNavigator(TabItem.tab1),
+                  _buildOffstageNavigator(TabItem.tab2),
+                  _buildOffstageNavigator(TabItem.tab3),
+                  _buildOffstageNavigator(TabItem.tab4),
+                  _buildOffstageNavigator(TabItem.tab5),
+                ]),
+                bottomNavigationBar: BottomNavigation(
+                  currentTab: model.currentTab,
+                  onSelectTab: _selectTab,
+                ),
               ),
             ),
           );
         }));
-  }
-
-  Widget _buildOffstageNavigator(TabItem tabItem) {
-    return Offstage(
-      offstage: model.currentTab != tabItem,
-      child: _tabNavigator(tabItem),
-    );
   }
 }

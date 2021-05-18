@@ -3,17 +3,17 @@ import 'package:multiple_bottomNavigationBar/appStateContainer/state_model.dart'
 import 'package:multiple_bottomNavigationBar/navigation/bottom_navigation.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-class CartPage extends StatefulWidget {
+class FijiScreen extends StatefulWidget {
   final MaterialColor color;
   final String title;
   final ValueChanged onPush;
-  CartPage({this.color, this.title, this.onPush});
+  FijiScreen({this.color, this.title, this.onPush});
 
   @override
   _CartPageState createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends State<FijiScreen> {
   StateModel model;
 
   @override
@@ -45,7 +45,7 @@ class _CartPageState extends State<CartPage> {
               alignment: Alignment.center,
               color: Colors.white,
               child: Text(
-                "CartPage",
+                "Welcome to Fiji",
                 style: TextStyle(
                   color: this.widget.color,
                 ),
