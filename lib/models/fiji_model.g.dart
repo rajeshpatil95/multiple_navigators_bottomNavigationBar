@@ -7,13 +7,14 @@ part of 'fiji_model.dart';
 // **************************************************************************
 
 FijiModel _$FijiModelFromJson(Map<String, dynamic> json) {
-  return FijiModel()
-    ..type = json['type'] as String
-    ..name = json['name'] as String
-    ..country = json['country'] as String
-    ..capital = json['capital'] as String
-    ..currency = json['currency'] as String
-    ..population = json['population'] as String;
+  return FijiModel(
+    type: json['type'] as String,
+    capital: json['capital'] as String,
+    country: json['country'] as String,
+    currency: json['currency'] as String,
+    name: json['name'] as String,
+    population: json['population'] as String,
+  );
 }
 
 Map<String, dynamic> _$FijiModelToJson(FijiModel instance) => <String, dynamic>{

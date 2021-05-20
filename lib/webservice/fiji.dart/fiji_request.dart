@@ -1,42 +1,33 @@
 import 'dart:convert';
 import 'dart:core';
-import 'package:http/http.dart' as http;
 import 'package:multiple_bottomNavigationBar/generated/l10n.dart';
 import 'package:multiple_bottomNavigationBar/models/fiji_model.dart';
-import 'package:multiple_bottomNavigationBar/resources/strings/app_strings.dart';
+import 'package:multiple_bottomNavigationBar/utils/mock_server.dart';
+import 'package:multiple_bottomNavigationBar/utils/test_response.dart';
 import 'package:multiple_bottomNavigationBar/webservice/base_request.dart';
 import '../../webservice/extensions.dart';
 
 class FijiRequest extends BaseRequest {
-  Future<FijiModel> getFiji(String transactionId) async {
-    var response = await this.constructAndExecuteRequest(
+  Future<FijiModel> getFiji() async {
+     final response = await mockApiCall(
+        body: TestResponse.testFiji,
         method: HttpMethod.get,
-        authenticated: true,
-        endpoint: Endpoints.getLoanPlans + transactionId);
-
+        callBackDelay: CallBackDelay.CALLBACK_DELAY_SHORT);
     if (response.isSuccessful()) {
-      return json
-          .decode(utf8.decode(response.bodyBytes))
-          .map<FijiModel>(
-              (dynamic loanPlan) => FijiModel.fromJson(loanPlan))
-          .toList();
+      return FijiModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception(response.body);
+      throw Exception(Strings.current.genericWebRequestError);
     }
   }
 
   Future<FijiModel> postFiji(FijiModel fijiModel) async {
-    http.Response response = await constructAndExecuteRequest(
-        method: HttpMethod.post,
-        endpoint: Endpoints.evaluateLoan,
-        authenticated: true,
-        body: jsonEncode(fijiModel.toJson()));
-
+     final response = await mockApiCall(
+        body: fijiModel.toJson(),
+        method: HttpMethod.get,
+        callBackDelay: CallBackDelay.CALLBACK_DELAY_SHORT);
     if (response.isSuccessful()) {
-      return FijiModel.fromJson(
-          json.decode(utf8.decode(response.bodyBytes)));
+      return FijiModel.fromJson(jsonDecode(response.body));
     } else {
-      // TODO parse error
       throw Exception(Strings.current.genericWebRequestError);
     }
   }

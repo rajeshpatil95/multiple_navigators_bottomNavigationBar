@@ -10,7 +10,7 @@ class FijiModel {
   String currency;
   String population;
 
-  FijiModel();
+  FijiModel({this.type, this.capital, this.country, this.currency, this.name, this.population});
 
     factory FijiModel.fromJson(Map<String, dynamic> json) =>
       _$FijiModelFromJson(json);

@@ -10,8 +10,8 @@ class FijiBloc extends Bloc<FijiEvent, FijiState> {
 
   FijiBloc(this.fijiRepository) : super(OnFijiGetInitialState());
 
-  FijiModel fijiModel = new FijiModel();
-  FijiModel fijiModel1 = new FijiModel();
+  FijiModel fijiGetModel = FijiModel();
+  FijiModel fijiPostModel = FijiModel();
 
   @override
   Stream<FijiState> mapEventToState(FijiEvent event) async* {
@@ -19,10 +19,10 @@ class FijiBloc extends Bloc<FijiEvent, FijiState> {
       yield OnFijiGetInitialState();
       yield OnFijiGetLoadingState();
       try {
-        this.fijiModel = await fijiRepository.getFiji("");
+        this.fijiGetModel = await fijiRepository.getFiji();
         print("FijiGetEvent Success: ");
 
-        yield OnFijiGetSuccessState(fijiModel: fijiModel);
+        yield OnFijiGetSuccessState(fijiModel: fijiGetModel);
       } catch (e) {
         yield OnFijiGetFailureState();
       }
@@ -30,7 +30,7 @@ class FijiBloc extends Bloc<FijiEvent, FijiState> {
       yield OnFijiPostInitialState();
       yield OnFijiPostLoadingState();
       try {
-        this.fijiModel1 = await fijiRepository.postFiji(event.fijiModel);
+        this.fijiPostModel = await fijiRepository.postFiji(event.fijiModel);
         print("FijiPostEvent Success: ");
 
         yield OnFijiPostSuccessState();
